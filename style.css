@@ -1,7 +1,7 @@
 :root {
     /* text */
-    --Very-dark-desaturated-blue: hsl(238, 29%, 16%);
-    --Soft-red: hsl(14, 88%, 65%);
+    --Very-dark-desaturated-blue-h1: hsl(238, 29%, 16%);
+    --Soft-red-arrow: hsl(14, 88%, 65%);
     /* bg */
     --Soft-violet: hsl(273, 75%, 66%);
     --Soft-blue: hsl(240, 73%, 65%);
@@ -24,15 +24,42 @@ body {
     background: linear-gradient(45deg, hsl(240, 73%, 65%), hsl(273, 75%, 66%));
 }
 main {
-    width: 60%;
+    width: 1200px;
     height: 600px;
     border-radius: 25px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
     background-color: white;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-h1 {
+/* there has to be a better way to position images, stack images, position background image */
+.left {
+    background: url(images/bg-pattern-desktop.svg);
+    background-position: -550px -220px;
+    background-repeat: no-repeat;
+    position: relative;
+}
+/* need to cut off left part */
+.woman {
+    position: absolute;
+    bottom: 100px;
+    left: -50px;
+}
+.cube {
+    position: absolute;
+    bottom: 150px;
+    left: -100px;
+    z-index: 1;
+}
+
+.question-container {
+    display: grid;
+    place-items: left;
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: 4rem;
+}
+.question-container h1 {
     font-size: 2rem;
     font-family: var(--ff);
     margin-bottom: 2rem;
@@ -40,29 +67,42 @@ h1 {
 .question {
     font-size: 1rem;
     font-family: var(--ff);
-    color: var(--Very-dark-desaturated-blue);
+    color: var(--Very-dark-desaturated-blue-h1);
     width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
 }
-.question-container {
-    display: grid;
-    place-items: left;
-    margin-top: 5rem;
-    gap: 1rem;
+.answer {
+    width: 80%;
+    font-size: 1rem;
+    font-family: var(--ff);
+    color: var(--Very-dark-grayish-blue);
+    display: none;
 }
 .divider {
     border-bottom: solid 1px var(--Light-grayish-blue);
     width: 80%;
 }
-.hidden {
-    display: none;
+.active {
+    display: flex;  
+}
+@media screen and (max-width: 1320px) {
+    main {
+        width: 80%;
+        height: auto;
+    }
+    .woman {
+        width: 300px;
+    }
 }
 @media screen and (max-width: 650px) {
-    
+    main {
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+    }
 }
 @media screen and (max-width: 375px) {
-
 }
