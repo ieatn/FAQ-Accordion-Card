@@ -24,11 +24,13 @@ body {
     background: linear-gradient(45deg, hsl(240, 73%, 65%), hsl(273, 75%, 66%));
 }
 main {
+    /* why is max-width so small? when to use width vs max-width? */
     width: 1200px;
     height: 600px;
     border-radius: 25px;
     box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
     background-color: white;
+    /* grid or flex? */
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -87,28 +89,54 @@ main {
     border-bottom: solid 1px var(--Light-grayish-blue);
     width: 80%;
 }
-/* chatgpt recommends only hidden class */
 .hidden {
     display: none;
 }
 .active {
     color: var(--Soft-red-arrow);
 }
+
+/* media queries */
 @media screen and (max-width: 1320px) {
     main {
         width: 80%;
         height: auto;
     }
-    .woman {
-        width: 300px;
-    }
 }
 @media screen and (max-width: 650px) {
+    /* main is originally grid so we have to turn into flex for column*/
     main {
-        height: 80%;
         display: flex;
         flex-direction: column;
+        height: 80%;
+    }
+    .left {
+        height: 20%;
+        overflow: visible;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /* cannot position image */
+    .woman {
+        width: 100%;
+    }
+    .question-container h1 {
+        text-align: center;
+    }
+    .question-container {
+        height: 80%;
+        place-items: center;
     }
 }
 @media screen and (max-width: 375px) {
+    p {
+        font-size: 0.8rem;
+    }
+    .question-container h1 {
+        font-size: 1.5rem;
+    }
+    .answer {
+        font-size: 0.8rem;
+    }
 }
