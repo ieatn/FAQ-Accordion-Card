@@ -32,24 +32,27 @@ main {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-/* there has to be a better way to position images, stack images, position background image */
+/* there has to be a better way to position images, stack images, position the background image */
 .left {
     background: url(images/bg-pattern-desktop.svg);
     background-position: -550px -220px;
     background-repeat: no-repeat;
     position: relative;
+    /* cut off left part of woman! success! */
+    overflow: hidden;
 }
-/* need to cut off left part */
 .woman {
     position: absolute;
     bottom: 100px;
     left: -50px;
+    z-index: 1;
 }
+/* now how to get cube to show? */
 .cube {
     position: absolute;
     bottom: 150px;
     left: -100px;
-    z-index: 1;
+    z-index: 2;
 }
 
 .question-container {
@@ -79,14 +82,17 @@ main {
     font-size: 1rem;
     font-family: var(--ff);
     color: var(--Very-dark-grayish-blue);
-    display: none;
 }
 .divider {
     border-bottom: solid 1px var(--Light-grayish-blue);
     width: 80%;
 }
+/* chatgpt recommends only hidden class */
+.hidden {
+    display: none;
+}
 .active {
-    display: flex;  
+    color: var(--Soft-red-arrow);
 }
 @media screen and (max-width: 1320px) {
     main {
