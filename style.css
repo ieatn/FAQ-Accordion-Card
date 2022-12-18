@@ -79,6 +79,9 @@ main {
     align-items: center;
     cursor: pointer;
 }
+.question:hover {
+    color: var(--Soft-red-arrow);
+}
 .answer {
     width: 80%;
     font-size: 1rem;
@@ -93,7 +96,7 @@ main {
     display: none;
 }
 .active {
-    color: var(--Soft-red-arrow);
+    font-weight: 900;
 }
 
 /* media queries */
@@ -117,7 +120,7 @@ main {
         justify-content: center;
         align-items: center;
     }
-    /* cannot position image */
+    /* this image position is incorrect */
     .woman {
         width: 100%;
     }
