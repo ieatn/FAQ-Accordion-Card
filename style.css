@@ -1,145 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
 :root {
-    /* text */
-    --Very-dark-desaturated-blue-h1: hsl(238, 29%, 16%);
-    --Soft-red-arrow: hsl(14, 88%, 65%);
-    /* bg */
-    --Soft-violet: hsl(273, 75%, 66%);
-    --Soft-blue: hsl(240, 73%, 65%);
-    /* text */
-    --Very-dark-grayish-blue: hsl(237, 12%, 33%);
-    --Dark-grayish-blue: hsl(240, 6%, 50%);
-    /* divider */
-    --Light-grayish-blue: hsl(240, 5%, 91%);
+    --text-blue: hsl(238, 29%, 16%);
+    --arrow-red: hsl(14, 88%, 65%);
+    --gradient-violet: hsl(273, 75%, 66%);
+    --gradient-blue: hsl(240, 73%, 65%);
+    --text-verydarkblue: hsl(237, 12%, 33%);
+    --text-darkblue: hsl(240, 6%, 50%);
+    --divider: hsl(240, 5%, 91%);
     --ff: 'Kumbh Sans', sans-serif;
 }
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
-    display: grid;
-    place-items: center;
-    height: 100vh;
-    background: linear-gradient(45deg, hsl(240, 73%, 65%), hsl(273, 75%, 66%));
-}
-main {
-    /* why is max-width so small? when to use width vs max-width? */
-    width: 1200px;
-    height: 600px;
-    border-radius: 25px;
-    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.4);
-    background-color: white;
-    /* grid or flex? */
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-/* there has to be a better way to position images, stack images, position the background image */
-.left {
-    background: url(images/bg-pattern-desktop.svg);
-    background-position: -550px -220px;
-    background-repeat: no-repeat;
-    position: relative;
-    /* cut off left part of woman! success! */
-    overflow: hidden;
-}
-.woman {
-    position: absolute;
-    bottom: 100px;
-    left: -50px;
-    z-index: 1;
-}
-/* now how to get cube to show? */
-.cube {
-    position: absolute;
-    bottom: 150px;
-    left: -100px;
-    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(var(--gradient-violet), var(--gradient-blue));
+    font-family: var(--ff);
+    padding: 3rem;
 }
 
-.question-container {
-    display: grid;
-    place-items: left;
-    gap: 1rem;
-    padding: 1rem;
-    margin-top: 4rem;
+.container {
+    width: 900px;
+    background-color: white;
+    border-radius: 2rem;
+    /* shadow at top for mobile */
+    background-image: url(images/bg-pattern-mobile.svg);
+    background-size: 15rem;
+    background-repeat: no-repeat;
+    background-position: top center;
 }
-.question-container h1 {
-    font-size: 2rem;
-    font-family: var(--ff);
-    margin-bottom: 2rem;
+
+h1 {
+    /* FAQ position */
+    margin-bottom: 1rem;
 }
-.question {
-    font-size: 1rem;
-    font-family: var(--ff);
-    color: var(--Very-dark-desaturated-blue-h1);
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
+
+/* woman size for mobile */
+.left img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: -5.5rem auto;
 }
-.question:hover {
-    color: var(--Soft-red-arrow);
-}
-.answer {
-    width: 80%;
-    font-size: 1rem;
-    font-family: var(--ff);
-    color: var(--Very-dark-grayish-blue);
-}
-.divider {
-    border-bottom: solid 1px var(--Light-grayish-blue);
-    width: 80%;
-}
-.hidden {
+
+.cube {
     display: none;
 }
-.active {
-    font-weight: 900;
+
+/* for mobile, move questions below woman and add space for questions */
+.right {
+    margin-top: 8rem;
+    padding: 2rem;
 }
 
-/* media queries */
-@media screen and (max-width: 1320px) {
-    main {
-        width: 80%;
+.accordion-item {
+    border-bottom: 1px solid var(--divider);
+    margin-top: 1rem;
+}
+
+/* button */
+.accordion-question {
+    font-size: 1rem;
+    font-family: inherit;
+    border: none;
+    /* question and arrow on same line, take up full width */
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+/* arrow */
+.accordion-question::after {
+    content: '';
+    background-image: url('images/icon-arrow-down.svg');
+    display: block;
+    /* need to set size of arrow */
+    width: 10px;
+    height: 10px;
+    background-repeat: no-repeat;
+    /* transition needs to be on question after each open/close toggle */
+    transition: transform 0.3s ease-in-out;
+}
+
+/* show answer */
+.accordion-question.open {
+    font-weight: 700;
+}
+
+.accordion-question.open::after {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    padding-bottom: 1rem;
+}
+
+.accordion-collapse {
+    transition: height 0.3s ease;
+}
+
+/* hide answer */
+.accordion-collapse.collapse {
+    display: none;
+}
+
+/* make the content open/close smoother */
+.accordion-collapse.collapsing {
+    height: 0;
+    overflow: hidden;
+}
+
+.accordion-collapse.open {
+    display: block;
+}
+
+/* desktop */
+@media (min-width: 1000px) {
+    .container {
+        /* height stretches fits content inside */
         height: auto;
-    }
-}
-@media screen and (max-width: 650px) {
-    /* main is originally grid so we have to turn into flex for column*/
-    main {
         display: flex;
-        flex-direction: column;
-        height: 80%;
+        /* shadow image sizing and position */
+        background-image: url('images/bg-pattern-desktop.svg');
+        background-size: 45%;
+        background-position: -13% center;
+        position: relative;
     }
+    /* 50% each */
+    .left, .right {
+        flex: 1;
+    }
+    /* center woman and cut off woman */
     .left {
-        height: 20%;
-        overflow: visible;
         display: flex;
-        justify-content: center;
         align-items: center;
+        padding-right: 2rem;
+        overflow: hidden;
     }
-    /* this image position is incorrect */
-    .woman {
-        width: 100%;
+    /* only max size of 400px for woman, move to left */
+    .left img {
+        transform: translateX(-4rem);
+        max-width: 400px;
     }
-    .question-container h1 {
-        text-align: center;
+    /* position cube to left, center, show above card and woman */
+    .cube {
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateX(-50%) translateY(-30%);
+        z-index: 1;
     }
-    .question-container {
-        height: 80%;
-        place-items: center;
+    /* spacing for questions */
+    .right {
+        margin: 0;
+        padding: 2rem;
     }
 }
-@media screen and (max-width: 375px) {
-    p {
-        font-size: 0.8rem;
-    }
-    .question-container h1 {
-        font-size: 1.5rem;
-    }
-    .answer {
-        font-size: 0.8rem;
-    }
-}
+
